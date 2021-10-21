@@ -1,0 +1,30 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "post"
+      ],
+      "route":"public/persona"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "item",
+      "databaseName": "organizacion",
+      "collectionName": "personas",
+      "connectionStringSetting": "CosmosDBConnection",
+      "sqlQuery":"SELECT * from c where c.email = {email}",
+      "PartitionKey": "bciseguros"
+    }
+  ],
+  "scriptFile": "../dist/getPersona/index.js"
+}
