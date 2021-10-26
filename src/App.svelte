@@ -2,10 +2,494 @@
   export let name: string;
 </script>
 
-<main>
-  <h1 class="py-8 px-4 border border-red-900 shadow-lg">Hello {name}!</h1>
-  <p>
-    Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-    how to build Svelte apps.
-  </p>
-</main>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="bg-white shadow overflow-hidden sm:rounded-md">
+  <ul role="list" class="divide-y divide-gray-200">
+    <li>
+      <a href="#" class="block hover:bg-gray-50">
+        <div class="px-4 py-4 sm:px-6">
+          <div class="flex items-center justify-between">
+            <p class="text-sm font-medium text-indigo-600 truncate">
+              Servicio 1
+            </p>
+            <div class="ml-2 flex-shrink-0 flex">
+              <p
+                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+              >
+                Pendiente
+              </p>
+            </div>
+          </div>
+          <div class="mt-2 sm:flex sm:justify-between">
+            <div class="sm:flex">
+              <p class="flex items-center text-sm text-gray-500">
+                <!-- Heroicon name: solid/users -->
+                <svg
+                  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
+                  />
+                </svg>
+                Carlos martinez
+              </p>
+              <p
+                class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6"
+              >
+                <!-- Heroicon name: solid/location-marker -->
+              </p>
+            </div>
+            <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+              <!-- Heroicon name: solid/calendar -->
+              <svg
+                class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <p>
+                Cierra en on
+                <time datetime="2020-01-07">Enero 7, 2020</time>
+              </p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a href="#" class="block hover:bg-gray-50">
+        <div class="px-4 py-4 sm:px-6">
+          <div class="flex items-center justify-between">
+            <p class="text-sm font-medium text-indigo-600 truncate">
+              Servicio 2
+            </p>
+            <div class="ml-2 flex-shrink-0 flex">
+              <p
+                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+              >
+                Listo
+              </p>
+            </div>
+          </div>
+          <div class="mt-2 sm:flex sm:justify-between">
+            <div class="sm:flex">
+              <p class="flex items-center text-sm text-gray-500">
+                <!-- Heroicon name: solid/users -->
+                <svg
+                  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
+                  />
+                </svg>
+                Raul Ramirez
+              </p>
+            </div>
+            <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+              <!-- Heroicon name: solid/calendar -->
+              <svg
+                class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <p>
+                Fecha lìmite
+                <time datetime="2020-01-07">Enero 7, 2020</time>
+              </p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a href="#" class="block hover:bg-gray-50">
+        <div class="px-4 py-4 sm:px-6">
+          <div class="flex items-center justify-between">
+            <p class="text-sm font-medium text-indigo-600 truncate">
+              Servicio 3
+            </p>
+            <div class="ml-2 flex-shrink-0 flex">
+              <p
+                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+              >
+                Listo
+              </p>
+            </div>
+          </div>
+          <div class="mt-2 sm:flex sm:justify-between">
+            <div class="sm:flex">
+              <p class="flex items-center text-sm text-gray-500">
+                <!-- Heroicon name: solid/users -->
+                <svg
+                  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
+                  />
+                </svg>
+                Pedro Perez
+              </p>
+            </div>
+            <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+              <!-- Heroicon name: solid/calendar -->
+              <svg
+                class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <p>
+                Fecha lìmite
+                <time datetime="2020-01-14">Enero 14, 2020</time>
+              </p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<div class="bg-white shadow overflow-hidden sm:rounded-md">
+  <ul role="list" class="divide-y divide-gray-200">
+    <li>
+      <a href="#" class="block hover:bg-gray-50">
+        <div class="px-4 py-4 flex items-center sm:px-6">
+          <div
+            class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between"
+          >
+            <div class="truncate">
+              <div class="flex text-sm">
+                <p class="ml-1 flex-shrink-0 font-normal text-gray-500">
+                  Pregunta 1
+                </p>
+              </div>
+              <div class="mt-2 flex">
+                <div class="flex items-center text-sm text-gray-500">
+                  <!-- Heroicon name: solid/calendar -->
+                  <svg
+                    class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+              <div class="flex overflow-hidden -space-x-1">
+                <span class="relative z-0 inline-flex shadow-sm rounded-md">
+                  <button
+                    type="button"
+                    class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    1
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    2
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    3
+                  </button>
+                  <button
+                    type="button"
+                    class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    4
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    5
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    6
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    7
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="ml-5 flex-shrink-0">
+            <!-- Heroicon name: solid/chevron-right -->
+            <svg
+              class="h-5 w-5 text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a href="#" class="block hover:bg-gray-50">
+        <div class="px-4 py-4 flex items-center sm:px-6">
+          <div
+            class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between"
+          >
+            <div class="truncate">
+              <div class="flex text-sm">
+                <p class="ml-1 flex-shrink-0 font-normal text-gray-500">
+                  Pregunta 2
+                </p>
+              </div>
+              <div class="mt-2 flex">
+                <div class="flex items-center text-sm text-gray-500">
+                  <!-- Heroicon name: solid/calendar -->
+                  <svg
+                    class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+              <div class="flex overflow-hidden -space-x-1">
+                <span class="relative z-0 inline-flex shadow-sm rounded-md">
+                  <button
+                    type="button"
+                    class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    1
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    2
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    3
+                  </button>
+                  <button
+                    type="button"
+                    class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    4
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    5
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    6
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    7
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="ml-5 flex-shrink-0">
+            <!-- Heroicon name: solid/chevron-right -->
+            <svg
+              class="h-5 w-5 text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a href="#" class="block hover:bg-gray-50">
+        <div class="px-4 py-4 flex items-center sm:px-6">
+          <div
+            class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between"
+          >
+            <div class="truncate">
+              <div class="flex text-sm">
+                <p class="ml-1 flex-shrink-0 font-normal text-gray-500">
+                  Pregunta 3
+                </p>
+              </div>
+              <div class="mt-2 flex">
+                <div class="flex items-center text-sm text-gray-500">
+                  <!-- Heroicon name: solid/calendar -->
+                  <svg
+                    class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+              <div class="flex overflow-hidden -space-x-1">
+                <span class="relative z-0 inline-flex shadow-sm rounded-md">
+                  <button
+                    type="button"
+                    class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    1
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    2
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    3
+                  </button>
+                  <button
+                    type="button"
+                    class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    4
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    5
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    6
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    7
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="ml-5 flex-shrink-0">
+            <!-- Heroicon name: solid/chevron-right -->
+            <svg
+              class="h-5 w-5 text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
