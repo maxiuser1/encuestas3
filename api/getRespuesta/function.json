@@ -1,0 +1,30 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get"
+      ],
+      "route":"respuestas/{id}"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "item",
+      "databaseName": "organizacion",
+      "collectionName": "respuestas",
+      "connectionStringSetting": "CosmosDBConnection",
+      "Id":"{id}",
+      "PartitionKey":"{id}"
+    }
+  ],
+  "scriptFile": "../dist/getRespuesta/index.js"
+}
