@@ -3,8 +3,12 @@
   export let name = "test";
 
   let mostrarEncuestas: boolean = true;
+  let cargandoi: boolean = true;
+  let respondiendo: boolean = false;
   let evaluaciones = [];
+  let campana: any = {};
   let preguntas = [];
+  let evaluador: any = {};
   let servicio = "";
   let iEvaluacion = 0;
   const params = new URLSearchParams(window.location.search);
@@ -12,7 +16,11 @@
   onMount(async () => {
     const response = await fetch(`/api/respuestas/${respuestaId}`);
     const respuesta = await response.json();
+    console.log("termino", respuesta);
+    cargandoi = false;
     evaluaciones = respuesta.evaluaciones;
+    campana = respuesta.campana;
+    evaluador = respuesta.evaluador;
   });
 
   function abrirEncuesta(evaluacion, indiceEvaluacion) {
@@ -27,6 +35,7 @@
   }
 
   async function puntuar(nota, iPregunta) {
+    respondiendo = true;
     const data = { e: iEvaluacion, p: iPregunta, v: nota };
     const response = await fetch(`/api/private/respuestas/${respuestaId}`, {
       method: "PUT",
@@ -35,6 +44,20 @@
       },
       body: JSON.stringify(data),
     });
+    respondiendo = false;
+
+    if (evaluaciones.some((t) => t.preguntas.some((p) => !p.valor))) {
+      console.log("-");
+    } else {
+      const dataFinaliza = { ev: evaluador.id };
+      const respfinaliza = await fetch(`/api/private/campana/${campana.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinaliza),
+      });
+    }
   }
 </script>
 
@@ -43,11 +66,39 @@
   <div class="pb-5 border-b border-gray-200 text-center">
     <h3 class="text-lg leading-6 font-medium text-gray-900">Encuestas Calidad de Servicio</h3>
   </div>
+
+  {#if cargandoi}
+    <div class="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
+      <div class="animate-pulse flex space-x-4">
+        <div class="rounded-full bg-blue-400 h-12 w-12" />
+        <div class="flex-1 space-y-4 py-1">
+          <div class="h-4 bg-blue-400 rounded w-3/4" />
+          <div class="space-y-2">
+            <div class="h-4 bg-blue-400 rounded" />
+            <div class="h-4 bg-blue-400 rounded w-5/6" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto mt-3">
+      <div class="animate-pulse flex space-x-4">
+        <div class="rounded-full bg-blue-400 h-12 w-12" />
+        <div class="flex-1 space-y-4 py-1">
+          <div class="h-4 bg-blue-400 rounded w-3/4" />
+          <div class="space-y-2">
+            <div class="h-4 bg-blue-400 rounded" />
+            <div class="h-4 bg-blue-400 rounded w-5/6" />
+          </div>
+        </div>
+      </div>
+    </div>
+  {/if}
+
   {#if mostrarEncuestas}
     <div class="bg-white shadow overflow-hidden sm:rounded-m max-w-7xl mx-auto">
       <ul role="list" class="divide-y divide-gray-200">
         {#each evaluaciones as evaluacion, i}
-          <li class="px-4 py-4 sm:px-0" on:click={() => abrirEncuesta(evaluacion, i)}>
+          <li class="px-4 py-4 sm:px-0 cursor-pointer" on:click={() => abrirEncuesta(evaluacion, i)}>
             <div class="block hover:bg-gray-50">
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
@@ -127,6 +178,7 @@
                   <span class="relative z-0 inline-flex shadow-sm rounded-md">
                     {#each ["1", "2", "3", "4", "5", "6", "7"] as nota, i}
                       <button
+                        disabled={respondiendo}
                         on:click={() => {
                           pregunta.valor = nota;
                           puntuar(nota, j);
