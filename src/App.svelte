@@ -22,6 +22,12 @@
     evaluaciones = respuesta.evaluaciones;
     campana = respuesta.campana;
     evaluador = respuesta.evaluador;
+
+    if (evaluaciones.some((t) => t.preguntas.some((p) => !p.valor))) {
+      console.log("-");
+    } else {
+      encuestaTerminada = true;
+    }
   });
 
   function abrirEncuesta(evaluacion, indiceEvaluacion) {
@@ -66,9 +72,10 @@
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="relative pt-6 pb-16 sm:pb-24">
+<div class="relative pt-6 pb-16 sm:pb-24 ">
   <div class="pb-5 border-b border-gray-200 text-center">
-    <h3 class="text-lg leading-6 font-medium text-gray-900">Encuestas Calidad de Servicio</h3>
+    <h3 class="text-lg leading-6 font-medium text-gray-900">Encuestas Servicios Internos</h3>
+    <p class="mt-3">Hola {evaluador?.name} continuación encuentras los servicios los cuales has sido asignado para evaluación:</p>
   </div>
 
   {#if cargandoi}
@@ -99,19 +106,19 @@
   {/if}
 
   {#if mostrarEncuestas}
-    <div class="bg-white shadow overflow-hidden sm:rounded-m max-w-7xl mx-auto">
+    <div class="bg-white shadow overflow-hidden sm:rounded-m max-w-7xl mx-auto ">
       <ul role="list" class="divide-y divide-gray-200">
         {#each evaluaciones as evaluacion, i}
           <li class="px-4 py-4 sm:px-0 cursor-pointer" on:click={() => abrirEncuesta(evaluacion, i)}>
             <div class="block hover:bg-gray-50">
               <div class="px-4 py-4 sm:px-6">
-                <div class="flex items-center justify-between">
-                  <p class="text-sm font-medium text-indigo-600 truncate">{evaluacion.servicio}</p>
-                  <div class="ml-2 flex-shrink-0 flex">
+                <div class="flex items-center ">
+                  <p class="text-sm font-medium text-indigo-600 truncate">Servicio: {evaluacion.servicio}</p>
+                  <div class="ml-2">
                     {#if evaluacion.preguntas.some((t) => !t.valor)}
-                      <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pendiente</p>
+                      <p class="px-2 text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Estado : Pendiente</p>
                     {:else}
-                      <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Listo</p>
+                      <p class="px-2 text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Estado : Listo</p>
                     {/if}
                   </div>
                 </div>
@@ -124,7 +131,7 @@
                           d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
                         />
                       </svg>
-                      {evaluacion.responsable}
+                      Responsable: {evaluacion.responsable}
                     </p>
                   </div>
                 </div>
@@ -142,10 +149,8 @@
             <div class="flex items-center">
               <a href="#" on:click={() => volver()} class="text-gray-400 hover:text-gray-500">
                 <!-- Heroicon name: solid/home -->
-                <svg class="flex-shrink-0 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path
-                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
                 <span class="sr-only">Home</span>
               </a>
@@ -180,20 +185,36 @@
                 </div>
                 <div class="flex overflow-hidden -space-x-1">
                   <span class="relative z-0 inline-flex shadow-sm rounded-md">
-                    {#each ["1", "2", "3", "4", "5", "6", "7"] as nota, i}
-                      <button
-                        disabled={respondiendo}
-                        on:click={() => {
-                          pregunta.valor = nota;
-                          puntuar(nota, j);
-                        }}
-                        type="button"
-                        class={pregunta.valor == i + 1
-                          ? "relative inline-flex items-center px-4 py-2 rounded-l-md border bg-indigo-600 border-gray-300 text-sm font-medium text-white"
-                          : "relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300  text-sm font-medium text-gray-700"}
-                      >
-                        {nota}
-                      </button>
+                    {#each ["1", "2", "3", "4", "5", "6", "7", "0"] as nota, i}
+                      {#if nota != "0"}
+                        <button
+                          disabled={respondiendo}
+                          on:click={() => {
+                            pregunta.valor = nota;
+                            puntuar(nota, j);
+                          }}
+                          type="button"
+                          class={pregunta.valor == i + 1
+                            ? "relative inline-flex items-center px-4 py-2 rounded-l-md border bg-indigo-600 border-gray-300 text-sm font-medium text-white"
+                            : "relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300  text-sm font-medium text-gray-700"}
+                        >
+                          {nota}
+                        </button>
+                      {:else}
+                        <button
+                          disabled={respondiendo}
+                          on:click={() => {
+                            pregunta.valor = nota;
+                            puntuar(nota, j);
+                          }}
+                          type="button"
+                          class={pregunta.valor == i + 1
+                            ? "relative inline-flex items-center px-4 py-2 rounded-l-md border bg-indigo-600 border-gray-300 text-sm font-medium text-white"
+                            : "relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300  text-sm font-medium text-gray-700"}
+                        >
+                          NA
+                        </button>
+                      {/if}
                     {/each}
                   </span>
                 </div>
@@ -222,7 +243,7 @@
             </svg>
           </div>
           <div class="mt-3 text-center sm:mt-5">
-            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Gracias por completar las encuestas</h3>
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Muchas gracias por tu colaboración, sus respuestas han sido registradas con éxito.</h3>
           </div>
         </div>
       </div>
