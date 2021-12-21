@@ -37,21 +37,8 @@
     preguntas = evaluacion.preguntas;
   }
 
-  function volver() {
+  async function volver() {
     mostrarEncuestas = true;
-  }
-
-  async function puntuar(nota, iPregunta) {
-    respondiendo = true;
-    const data = { e: iEvaluacion, p: iPregunta, v: nota };
-    const response = await fetch(`/api/private/respuestas/${respuestaId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    respondiendo = false;
 
     if (evaluaciones.some((t) => t.preguntas.some((p) => !p.valor))) {
       console.log("-");
@@ -69,13 +56,39 @@
       mostrarEncuestas = true;
     }
   }
+
+  async function comentar(valor) {
+    respondiendo = true;
+    const data = { e: iEvaluacion, v: valor };
+    const response = await fetch(`/api/private/respuestas/${respuestaId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    respondiendo = false;
+  }
+
+  async function puntuar(nota, iPregunta) {
+    respondiendo = true;
+    const data = { e: iEvaluacion, p: iPregunta, v: nota };
+    const response = await fetch(`/api/private/respuestas/${respuestaId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    respondiendo = false;
+  }
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="relative pt-6 pb-16 sm:pb-24 ">
   <div class="pb-5 border-b border-gray-200 text-center">
-    <h3 class="text-lg leading-6 font-medium text-gray-900">Encuestas Servicios Internos</h3>
-    <p class="mt-3">Hola {evaluador?.name} continuación encuentras los servicios los cuales has sido asignado para evaluación:</p>
+    <h3 class="text-lg leading-6 font-medium text-gray-900">Encuesta Servicios Internos</h3>
+    <p class="mt-3">Hola {evaluador?.name} A continuación, encontrarás los servicios que te prestan otras áreas de la compañía, para que puedas evaluarlos:</p>
   </div>
 
   {#if cargandoi}
@@ -113,24 +126,18 @@
             <div class="block hover:bg-gray-50">
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center ">
-                  <p class="text-sm font-medium text-indigo-600 truncate">Servicio: {evaluacion.servicio}</p>
+                  <p class="text-sm font-medium text-indigo-600">{evaluacion.servicio}</p>
                   <div class="ml-2">
                     {#if evaluacion.preguntas.some((t) => !t.valor)}
-                      <p class="px-2 text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Estado : Pendiente</p>
+                      <p class="px-2 text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pendiente</p>
                     {:else}
-                      <p class="px-2 text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Estado : Listo</p>
+                      <p class="px-2 text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Listo</p>
                     {/if}
                   </div>
                 </div>
                 <div class="mt-2 sm:flex sm:justify-between">
                   <div class="sm:flex">
                     <p class="flex items-center text-sm text-gray-500">
-                      <!-- Heroicon name: solid/users -->
-                      <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path
-                          d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
-                        />
-                      </svg>
                       Responsable: {evaluacion.responsable}
                     </p>
                   </div>
@@ -147,13 +154,7 @@
         <ol role="list" class="bg-white rounded-md shadow px-6 flex space-x-4">
           <li class="flex">
             <div class="flex items-center">
-              <a href="#" on:click={() => volver()} class="text-gray-400 hover:text-gray-500">
-                <!-- Heroicon name: solid/home -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span class="sr-only">Home</span>
-              </a>
+              <a href="#" on:click={() => volver()} class="text-indigo-600 cursor-pointer"> Volver </a>
             </div>
           </li>
 
@@ -181,12 +182,12 @@
             <div class="block hover:bg-gray-50">
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
-                  <p class="text-sm font-medium text-indigo-600 truncate">{j + 1}. {pregunta.glosa}</p>
+                  <p class="text-sm font-medium text-indigo-600 ">{j + 1}. {pregunta.glosa}</p>
                 </div>
                 <div class="flex overflow-hidden -space-x-1">
                   <span class="relative z-0 inline-flex shadow-sm rounded-md">
-                    {#each ["1", "2", "3", "4", "5", "6", "7", "0"] as nota, i}
-                      {#if nota != "0"}
+                    {#each ["1", "2", "3", "4", "5", "6", "7", "8"] as nota, i}
+                      {#if nota != "8"}
                         <button
                           disabled={respondiendo}
                           on:click={() => {
@@ -195,8 +196,8 @@
                           }}
                           type="button"
                           class={pregunta.valor == i + 1
-                            ? "relative inline-flex items-center px-4 py-2 rounded-l-md border bg-indigo-600 border-gray-300 text-sm font-medium text-white"
-                            : "relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300  text-sm font-medium text-gray-700"}
+                            ? "relative inline-flex items-center px-3 py-1 md:mx-1 rounded-md border bg-indigo-600 border-gray-300 text-sm font-medium text-white"
+                            : "relative inline-flex items-center px-3 py-1 md:mx-1 rounded-md border border-gray-300  text-sm font-medium text-gray-700"}
                         >
                           {nota}
                         </button>
@@ -209,8 +210,8 @@
                           }}
                           type="button"
                           class={pregunta.valor == i + 1
-                            ? "relative inline-flex items-center px-4 py-2 rounded-l-md border bg-indigo-600 border-gray-300 text-sm font-medium text-white"
-                            : "relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300  text-sm font-medium text-gray-700"}
+                            ? "relative inline-flex items-center px-3 py-1 md:mx-1 rounded-md border bg-indigo-600 border-gray-300 text-sm font-medium text-white"
+                            : "relative inline-flex items-center px-3 py-1 md:mx-1 rounded-md border border-gray-300  text-sm font-medium text-gray-700"}
                         >
                           NA
                         </button>
@@ -222,7 +223,50 @@
             </div>
           </li>
         {/each}
+        <li>
+          <div class="block hover:bg-gray-50">
+            <div class="px-4 py-4 sm:px-6">
+              <div class="flex items-center justify-between">
+                <p class="text-sm font-medium text-indigo-600 ">¿Desea dejar un comentario adicional sobre el servicio?</p>
+              </div>
+              <div class="flex overflow-hidden -space-x-1">
+                <textarea
+                  id="about"
+                  name="about"
+                  rows="3"
+                  on:change={(e) => comentar(e.target.value)}
+                  class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
+                />
+              </div>
+            </div>
+          </div>
+        </li>
       </ul>
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol role="list" class="bg-white rounded-md shadow px-6 flex space-x-4">
+          <li class="flex">
+            <div class="flex items-center">
+              <a href="#" on:click={() => volver()} class="text-indigo-600 cursor-pointer"> Volver </a>
+            </div>
+          </li>
+
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="flex-shrink-0 w-6 h-full text-gray-200"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <span class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{servicio}</span>
+            </div>
+          </li>
+        </ol>
+      </nav>
     </div>
   {/if}
 </div>
@@ -243,7 +287,7 @@
             </svg>
           </div>
           <div class="mt-3 text-center sm:mt-5">
-            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Muchas gracias por tu colaboración, sus respuestas han sido registradas con éxito.</h3>
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Muchas gracias por tu colaboración, las respuestas han sido registradas con éxito.</h3>
           </div>
         </div>
       </div>
