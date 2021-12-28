@@ -154,7 +154,7 @@
         <ol role="list" class="bg-white rounded-md shadow px-6 flex space-x-4">
           <li class="flex">
             <div class="flex items-center">
-              <a href="#" on:click={() => volver()} class="text-indigo-600 cursor-pointer"> Volver </a>
+              <a href="#" on:click={() => volver()} class="text-indigo-600 cursor-pointer"> Volver</a>
             </div>
           </li>
 
