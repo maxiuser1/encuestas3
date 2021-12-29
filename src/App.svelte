@@ -6,6 +6,7 @@
   let cargandoi: boolean = true;
   let respondiendo: boolean = false;
   let encuestaTerminada: boolean = false;
+  let mostrarpopup: boolean = true;
   let evaluaciones = [];
   let campana: any = {};
   let preguntas = [];
@@ -31,10 +32,12 @@
   });
 
   function abrirEncuesta(evaluacion, indiceEvaluacion) {
-    iEvaluacion = indiceEvaluacion;
-    mostrarEncuestas = false;
-    servicio = evaluacion.servicio;
-    preguntas = evaluacion.preguntas;
+    if (!encuestaTerminada) {
+      iEvaluacion = indiceEvaluacion;
+      mostrarEncuestas = false;
+      servicio = evaluacion.servicio;
+      preguntas = evaluacion.preguntas;
+    }
   }
 
   async function volver() {
@@ -246,7 +249,7 @@
         <ol role="list" class="bg-white rounded-md shadow px-6 flex space-x-4">
           <li class="flex">
             <div class="flex items-center">
-              <a href="#" on:click={() => volver()} class="text-indigo-600 cursor-pointer"> Volver </a>
+              <a href="#" on:click={() => volver()} class="text-indigo-600 cursor-pointer"> Guardar </a>
             </div>
           </li>
 
@@ -271,7 +274,7 @@
   {/if}
 </div>
 
-{#if encuestaTerminada}
+{#if encuestaTerminada && mostrarpopup}
   <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" />
@@ -288,6 +291,9 @@
           </div>
           <div class="mt-3 text-center sm:mt-5">
             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Muchas gracias por tu colaboración, las respuestas han sido registradas con éxito.</h3>
+          </div>
+          <div class="mt-2 text-center">
+            <button on:click={() => (mostrarpopup = false)} class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Cerrar</button>
           </div>
         </div>
       </div>
